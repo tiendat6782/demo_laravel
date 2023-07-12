@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StudentRequest;
 use  Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -34,5 +35,14 @@ class StudentController extends Controller
         // ->first();
         // dd($student);
         return view('Student.index', compact('title','name','students'));
+    }
+    public function addStudent(StudentRequest $request){
+        //nếu tồn tại request post , khi ng dùng click vào nút thì mới laf post
+        if($request->post()){
+
+
+            // dd(233);
+        }
+        return view('Student.add');
     }
 }
