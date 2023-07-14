@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 Route::get('/student',[App\Http\Controllers\StudentController::class, 'index']);
 Route::post('/student',[App\Http\Controllers\StudentController::class, 'index']);
-Route::match(['GET','POST'],'/add-student',[App\Http\Controllers\StudentController::class, 'addStudent']);
+Route::match(['GET','POST'],'/student/add',[App\Http\Controllers\StudentController::class, 'addStudent'])->name('route_student_add');

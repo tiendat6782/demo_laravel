@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StudentRequest;
 use  Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Student;
 
 class StudentController extends Controller
@@ -38,9 +39,12 @@ class StudentController extends Controller
     }
     public function addStudent(StudentRequest $request){
         //nếu tồn tại request post , khi ng dùng click vào nút thì mới laf post
-        if($request->post()){
-
-
+        if($request->isMethod('POST')){
+            $student = Student::create($request->except('_token'));
+        if($student->id){
+            Session::flash('success','Thêm mới thành công sinh viên');
+            return redirect()->route('route_student_add');
+        }
             // dd(233);
         }
         return view('Student.add');

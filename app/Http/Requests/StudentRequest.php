@@ -32,10 +32,10 @@ class StudentRequest extends FormRequest
                 switch($currentAction) :
                     case 'addStudent':
                         $rule = [
-                            "email"=>"required|email|unique.studentss",
+                            "email"=>"required|email|unique:studentss",
                             "name"=>"required",
-                            "address"=>"required",
-                            "date_of_birth"=>"required"
+                            // "address"=>"required",
+                            // "date_of_birth"=>"required"
                         ];
                         break;
                     endswitch;
