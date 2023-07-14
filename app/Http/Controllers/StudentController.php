@@ -49,4 +49,21 @@ class StudentController extends Controller
         }
         return view('Student.add');
     }
+
+    public function editStudent(StudentRequest $request, $id){
+        //cach 1 DB query
+        // $student = DB::table('studentss')->where('id','=',$id)->first();
+        //cach 2 dung model
+        $student = Student::find($id);
+        // dd($student);
+        if($request->isMethod('POST')){
+            $result = Student::where('id',$id)->update($request->except('_token'));
+        }
+        if($result){
+            Session::flash('success','Thêm mới thành công sinh viên');
+            return redirect()->route('route_student_edit',['id'=>$id]);
+        }
+        return view('Student.edit', compact('student'));
+
+    }
 }
