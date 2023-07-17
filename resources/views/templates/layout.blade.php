@@ -52,6 +52,10 @@
 
   <script src="{{ asset('bootstrap/js/bootstrap.bundle.js') }}"></script>
   <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
+  <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+
+  <script src="{{ asset('libs/input-mask/jquery.inputmask.js') }}"></script>
+  @yield('script')
 </body>
 
 </html>

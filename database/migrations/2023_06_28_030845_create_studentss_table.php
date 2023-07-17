@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('address')->nullable(); 
             // co cung dc khong co cung khong sao
-            $table->date('date_of_birth');
+            $table->date('date_of_birth')->nullable();
+            $table->string('image')->nullable();
             $table->integer('status')->default(2);
             // khoi tao gia tri mac dinh la 1
             $table->timestamps();
