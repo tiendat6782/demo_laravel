@@ -6,6 +6,7 @@ use  Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Student;
+use Illuminate\Support\Facades\Storage;
 
 
 class StudentController extends Controller
@@ -18,6 +19,7 @@ class StudentController extends Controller
         $students = DB::table('studentss')
         ->select('id', 'name', 'email','image')
         ->get();
+        $students = Student::all();
         if($request->post() && $request->email) {
             //an vao thi nhay vao trong day
             $students = DB::table('studentss')
@@ -84,7 +86,19 @@ class StudentController extends Controller
         $student = Student::find($id);
 
         if ($request->isMethod('POST')) {
-            $result = Student::where('id', $id)->update($request->except('_token'));
+            $params = $request->except('_token');
+            if($request->hasFile('image') && $request->file('image')->isValid()){
+                //xoa anh cu
+                $resultDL = storage::delete('/public/'.$student->image); //$resultDL ktra co file de xoa k
+                if($resultDL){
+                    $params['image'] = uploadFile('hinh',$request->file('image'));
+                    //neu co anh de xoa thi se up anh moi len
+                }else{
+                    $params['image'] = $student->image;
+                    //neu k co anh de xoa thi van se lay anh cu
+                }
+            }
+            $result = Student::where('id', $id)->update($params);
 
             if ($result) {
                 Session::flash('success', 'Cập nhật sinh viên thành công');
@@ -95,5 +109,11 @@ class StudentController extends Controller
         }
 
         return view('Student.edit', compact('student'));
+    }
+
+    public function deleteStudent($id){
+        Student::where('id',$id)->delete();
+        Session::flash('success', 'Xóa thành công sinh viên có id: '.$id);
+                return redirect()->route('route_student_index');
     }
 }

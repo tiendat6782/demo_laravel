@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('status')->default(2);
             // khoi tao gia tri mac dinh la 1
             $table->timestamps();
+            
+            $table->softDeletes(); 
         });
     }
 
