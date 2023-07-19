@@ -20,6 +20,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Img</th>
+                <th>Action</th>
                 {{-- <th>Address</th>
                 <th>Date</th> --}}
             </tr>
@@ -30,6 +31,7 @@
                 <td>{{ $st->name }}</td>
                 <td>{{ $st->email }}</td>
                 <td><img src="{{ $st->image?''.Storage::url($st->image):''}}" style="width: 100px" /></td>
+                <td><a href="{{ route('route_student_delete',['id'=>$st->id]) }}">Delete</a></td>
                 {{-- <td>{{ $st->address }}</td>
                 <td>{{ $st->date_of_birth }}</td> --}}
 
