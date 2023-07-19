@@ -1,7 +1,7 @@
 @extends('templates.layout')
 @section('content')
 
-    <button><a href="{{ url('/add-student') }}"></a></button>
+    <button><a href="{{ url('/student/add') }}">add student</a></button>
     <h1>{{ $title }}</h1>
     <h1> {{ $name }} </h1>
 
@@ -19,6 +19,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Img</th>
                 {{-- <th>Address</th>
                 <th>Date</th> --}}
             </tr>
@@ -28,6 +29,7 @@
                 <td>{{ $st->id }}</td>
                 <td>{{ $st->name }}</td>
                 <td>{{ $st->email }}</td>
+                <td><img src="{{ $st->image?''.Storage::url($st->image):''}}" style="width: 100px" /></td>
                 {{-- <td>{{ $st->address }}</td>
                 <td>{{ $st->date_of_birth }}</td> --}}
 

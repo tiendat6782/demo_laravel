@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Student;
 
+
 class StudentController extends Controller
 {
     public function index(Request $request)
@@ -15,7 +16,7 @@ class StudentController extends Controller
         $name = "abcd";
 
         $students = DB::table('studentss')
-        ->select('id', 'name', 'email')
+        ->select('id', 'name', 'email','image')
         ->get();
         if($request->post() && $request->email) {
             //an vao thi nhay vao trong day
