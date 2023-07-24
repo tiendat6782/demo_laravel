@@ -19,10 +19,11 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            StudentSeeder::class,
-            CustomerSeeder::class,
-            CategorySeeder::class,
-            ProductSeeder::class
+            // StudentSeeder::class,
+            // CustomerSeeder::class,
+            // CategorySeeder::class,
+            // ProductSeeder::class,
+            UserSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
         // day la noi su dung de tao du lieu mau

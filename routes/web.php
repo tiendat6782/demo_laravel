@@ -17,8 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/student',[App\Http\Controllers\StudentController::class, 'index'])->name('route_student_index');
-Route::post('/student',[App\Http\Controllers\StudentController::class, 'index']);
+
+Route::match(['GET','POST'],'/login',[App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::match(['GET','POST'],'/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth', 'check.role'])->group(function (){
+    //tat ca cac route nao muon bao ve thi ut vao trong nay
+    Route::get('/student',[App\Http\Controllers\StudentController::class, 'index'])->name('route_student_index');
+    Route::post('/student',[App\Http\Controllers\StudentController::class, 'index']);
 Route::match(['GET','POST'],'/student/add',[App\Http\Controllers\StudentController::class, 'addStudent'])->name('route_student_add');
 Route::match(['GET','POST'],'/student/edit/{id}',[App\Http\Controllers\StudentController::class, 'editStudent'])->name('route_student_edit');
 Route::match(['GET','POST'],'/student/delete/{id}',[App\Http\Controllers\StudentController::class, 'deleteStudent'])->name('route_student_delete');
+});
+
+
+
